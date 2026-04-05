@@ -42,7 +42,7 @@ a{text-decoration:none;color:inherit;}
 .ctr{text-align:center;}.ctr .sb{margin:0 auto;}
 .sil-g{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:44px;}
 @media(min-width:560px){.sil-g{grid-template-columns:repeat(4,1fr);gap:18px;}}
-.sc{background:var(--bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:box-shadow .2s,transform .2s,border-color .2s;}
+.sc{background:var(--bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:box-shadow .2s,transform .2s,border-color .2s;display:block;cursor:pointer;color:inherit;text-decoration:none;}
 .sc:hover{box-shadow:0 8px 28px rgba(0,0,0,.07);transform:translateY(-3px);border-color:#ccc;}
 .sc-v{aspect-ratio:1;background:#EBEBEA;display:flex;align-items:center;justify-content:center;font-size:clamp(2rem,7vw,3.2rem);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
 .sc-v::after{content:'';position:absolute;bottom:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:rgba(197,217,46,.15);}
@@ -171,10 +171,10 @@ footer p{font-size:.54rem;font-weight:600;letter-spacing:1.5px;text-transform:up
 <section class="sec" id="sil">
   <div class="ctr r"><p class="ey">Our Range</p><h2 class="tt">Core <em>Silhouettes</em></h2><p class="sb">The foundation of every great brand. Precision engineered blanks ready for your vision.</p></div>
   <div class="sil-g">
-    <div class="sc r"><div class="sc-v">👕</div><div class="sc-b"><div class="sc-n">Classic Roundneck</div><div class="sc-s">Essential Tees</div></div></div>
-    <div class="sc r d1"><div class="sc-v">🧥</div><div class="sc-b"><div class="sc-n">Premium Oversized</div><div class="sc-s">Streetwear</div></div></div>
-    <div class="sc r d2"><div class="sc-v">🎽</div><div class="sc-b"><div class="sc-n">Executive Polo</div><div class="sc-s">Corporate</div></div></div>
-    <div class="sc r d3"><div class="sc-v">🧣</div><div class="sc-b"><div class="sc-n">Essential Hoodie</div><div class="sc-s">Winter Wear</div></div></div>
+    <a href="products.html#rn" class="sc r"><div class="sc-v">👕</div><div class="sc-b"><div class="sc-n">Classic Roundneck</div><div class="sc-s">Essential Tees</div></div></a>
+    <a href="products.html#os" class="sc r d1"><div class="sc-v">🧥</div><div class="sc-b"><div class="sc-n">Premium Oversized</div><div class="sc-s">Streetwear</div></div></a>
+    <a href="products.html#po" class="sc r d2"><div class="sc-v">🎽</div><div class="sc-b"><div class="sc-n">Executive Polo</div><div class="sc-s">Corporate</div></div></a>
+    <a href="products.html#hw" class="sc r d3"><div class="sc-v">🧣</div><div class="sc-b"><div class="sc-n">Essential Hoodie</div><div class="sc-s">Winter Wear</div></div></a>
   </div>
 </section>
 
