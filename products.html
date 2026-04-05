@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — Style Loop</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ── EXACT TOKENS FROM index.html ── */
+:root{--lime:#C5D92E;--ink:#111;--mid:#555;--soft:#888;--border:#E4E4E2;--bg:#F7F7F5;--white:#FFF;--wa:#25D366;--font:'Montserrat',sans-serif;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--white);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-thumb{background:var(--lime);}
+
+/* ── NAV — pixel perfect match ── */
+.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:62px;padding:0 clamp(18px,5vw,60px);display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-size:clamp(.88rem,2.5vw,1.05rem);font-weight:900;letter-spacing:5px;text-transform:uppercase;}
+.nav-logo em{font-style:normal;color:var(--lime);}
+.nav-left{display:flex;align-items:center;gap:20px;}
+.nav-back{display:flex;align-items:center;gap:5px;font-size:.52rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--soft);transition:color .15s;}
+.nav-back:hover{color:var(--ink);}
+.nav-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.nav-sub{font-size:.52rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--soft);}
+@media(max-width:560px){.nav-sub{display:none;}}
+.nav-wa{display:flex;align-items:center;gap:7px;background:var(--wa);color:#fff;font-size:.58rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:9px 16px;border-radius:100px;box-shadow:0 4px 16px rgba(37,211,102,.28);transition:transform .15s;}
+.nav-wa:hover{transform:translateY(-1px);}
+.nav-wa svg{width:13px;height:13px;fill:#fff;flex-shrink:0;}
+
+/* ── PAGE HERO ── */
+.pg-hero{padding:clamp(44px,7vw,80px) clamp(18px,5vw,60px) clamp(28px,4vw,48px);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.pg-hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:52px 52px;opacity:.45;pointer-events:none;}
+.pg-hero-glow{position:absolute;bottom:-60px;right:-60px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(197,217,46,.1) 0%,transparent 65%);pointer-events:none;}
+.pg-hero-inner{position:relative;z-index:1;}
+.pg-eyebrow{font-size:.52rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--soft);margin-bottom:10px;}
+.pg-title{font-size:clamp(2.8rem,9vw,6.5rem);font-weight:900;line-height:.88;letter-spacing:-2px;text-transform:uppercase;margin-bottom:16px;}
+.pg-title em{font-style:normal;color:var(--lime);}
+.pg-desc{font-size:clamp(.7rem,1.6vw,.82rem);font-weight:500;line-height:1.78;color:var(--soft);max-width:500px;}
+
+/* ── PRODUCT TAB NAV ── */
+.prod-nav{border-bottom:1px solid var(--border);padding:0 clamp(18px,5vw,60px);display:flex;align-items:center;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;background:var(--white);}
+.prod-nav::-webkit-scrollbar{display:none;}
+.pn-tab{flex-shrink:0;padding:16px 18px;font-size:.56rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--soft);border-bottom:2px solid transparent;cursor:pointer;transition:color .15s,border-color .15s;white-space:nowrap;margin-bottom:-1px;}
+.pn-tab:hover{color:var(--ink);}
+.pn-tab.active{color:var(--ink);border-bottom-color:var(--lime);}
+
+/* ── PRODUCT PANELS ── */
+.pd{display:none;}
+.pd.active{display:grid;grid-template-columns:1fr;}
+@media(min-width:760px){.pd.active{grid-template-columns:1fr 1fr;}}
+.pd.alt-bg{background:var(--bg);}
+
+/* ── IMAGE PANEL ── */
+.pd-img{background:#EBEBEA;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:clamp(5rem,14vw,9rem);position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+@media(min-width:760px){.pd-img{border-bottom:none;border-right:1px solid var(--border);aspect-ratio:auto;min-height:520px;}}
+.pd-img::after{content:'';position:absolute;bottom:-40px;right:-40px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(197,217,46,.14) 0%,transparent 70%);}
+.pd-badge{position:absolute;top:16px;left:16px;background:var(--ink);color:var(--lime);font-size:.44rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:5px 10px;border-radius:2px;z-index:2;}
+.pd-tag{position:absolute;bottom:16px;right:16px;background:var(--lime);color:var(--ink);font-size:.44rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;padding:4px 9px;border-radius:2px;z-index:2;}
+
+/* ── INFO PANEL ── */
+.pd-info{padding:clamp(28px,5vw,52px) clamp(18px,5vw,44px);}
+.p-ey{font-size:.52rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--soft);margin-bottom:6px;}
+.p-n{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;letter-spacing:-1px;text-transform:uppercase;line-height:.9;margin-bottom:14px;}
+.p-d{font-size:.78rem;font-weight:500;line-height:1.82;color:var(--soft);margin-bottom:26px;}
+
+/* ── SPECS — identical to index.html ── */
+.lbl{font-size:.52rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);margin-bottom:10px;}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:24px;}
+.sp{display:flex;align-items:center;gap:8px;font-size:.68rem;font-weight:600;color:var(--mid);}
+.ck{width:15px;height:15px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ck svg{width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;}
+
+/* ── PRICE TABLE — identical to index.html ── */
+.pt{width:100%;border-collapse:collapse;margin-bottom:22px;font-size:.7rem;}
+.pt th{font-size:.5rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:8px 9px;text-align:left;border-bottom:2px solid var(--border);color:var(--soft);}
+.pt th.bv{background:var(--ink);color:var(--lime);text-align:center;border-radius:5px 5px 0 0;}
+.bvt{display:inline-block;background:var(--lime);color:var(--ink);font-size:.42rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;padding:2px 7px;border-radius:2px;margin-bottom:3px;}
+.pt td{padding:8px 9px;border-bottom:1px solid var(--border);color:var(--mid);font-weight:600;}
+.pt td.bv{background:rgba(197,217,46,.09);font-weight:900;color:var(--ink);text-align:center;}
+.pt tr:last-child td{border-bottom:none;}
+.szs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:24px;}
+.sz{width:36px;height:36px;border-radius:4px;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--ink);}
+
+/* ── DISCLAIMER ── */
+.disc{font-size:.6rem;font-weight:500;color:var(--soft);line-height:1.7;padding:12px 14px;background:var(--bg);border-left:3px solid var(--lime);border-radius:0 4px 4px 0;margin-bottom:20px;}
+.disc strong{color:var(--mid);}
+
+/* ── CTA — identical to index.html ── */
+.pcta{display:flex;gap:11px;flex-wrap:wrap;}
+.bwa{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:#fff;font-size:.6rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:12px 22px;border-radius:4px;box-shadow:0 4px 14px rgba(37,211,102,.28);transition:transform .15s;}
+.bwa:hover{transform:translateY(-2px);}
+.bwa svg{width:13px;height:13px;fill:#fff;flex-shrink:0;}
+
+/* ── BOTTOM CTA — identical to index.html ── */
+.bcta{background:var(--ink);padding:clamp(60px,10vw,120px) clamp(18px,5vw,60px);text-align:center;position:relative;overflow:hidden;}
+.bcta::before{content:'SL';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:clamp(8rem,28vw,20rem);font-weight:900;color:rgba(255,255,255,.022);letter-spacing:-12px;pointer-events:none;line-height:1;}
+.bcta .ey{color:rgba(255,255,255,.3);position:relative;z-index:1;}
+.bcta .tt{font-size:clamp(1.6rem,5vw,3.2rem);font-weight:900;letter-spacing:-1.5px;line-height:.88;text-transform:uppercase;margin-bottom:12px;color:var(--white);position:relative;z-index:1;}
+.bcta .tt em{font-style:normal;color:var(--lime);}
+.bcta .sb{font-size:clamp(.7rem,1.6vw,.82rem);font-weight:500;line-height:1.78;color:rgba(255,255,255,.38);margin:0 auto 40px;max-width:440px;position:relative;z-index:1;}
+.bcta-r{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;position:relative;z-index:1;}
+.blm{display:inline-flex;align-items:center;gap:9px;background:var(--lime);color:var(--ink);font-size:.64rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:15px 32px;border-radius:3px;box-shadow:0 4px 20px rgba(197,217,46,.28);transition:transform .15s;}
+.blm:hover{transform:translateY(-2px);}
+.blm svg{width:14px;height:14px;fill:var(--ink);flex-shrink:0;}
+
+/* ── FOOTER — identical to index.html ── */
+footer{padding:28px clamp(18px,5vw,60px);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.fl{font-size:.88rem;font-weight:900;letter-spacing:4px;text-transform:uppercase;}
+.fl em{font-style:normal;color:var(--lime);}
+footer p{font-size:.54rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);}
+
+/* ── FIXED WA — identical to index.html ── */
+.fwa{position:fixed;bottom:22px;right:20px;z-index:300;width:54px;height:54px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;box-shadow:0 5px 26px rgba(37,211,102,.42);animation:fpop .5s .4s cubic-bezier(.34,1.56,.64,1) both;transition:transform .15s;}
+.fwa:hover{transform:scale(1.07);}
+.fwa svg{width:25px;height:25px;fill:#fff;}
+@keyframes fpop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+
+/* ── SCROLL ANIMATIONS — identical to index.html ── */
+.r{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.r.in{opacity:1;transform:none;}
+.d1{transition-delay:.07s;}.d2{transition-delay:.14s;}.d3{transition-delay:.21s;}
+</style>
+</head>
+<body>
+
+<svg style="display:none">
+  <symbol id="wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol>
+  <symbol id="ck" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+  <symbol id="chev" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+</svg>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-back"><svg><use href="#chev"/></svg>Home</a>
+    <div class="nav-logo">STYLE <em>LOOP</em></div>
+    <div class="nav-sub">Products &amp; Pricing</div>
+  </div>
+  <a href="https://wa.me/919843048883?text=Hi%20Style%20Loop!%20I%20want%20to%20enquire%20about%20bulk%20orders." target="_blank" class="nav-wa"><svg><use href="#wa"/></svg>WhatsApp Us</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="pg-hero">
+  <div class="pg-hero-grid"></div>
+  <div class="pg-hero-glow"></div>
+  <div class="pg-hero-inner">
+    <p class="pg-eyebrow r">Products &amp; Pricing</p>
+    <h1 class="pg-title r d1">Our<br><em>Collection</em></h1>
+    <p class="pg-desc r d2">Select a product below to explore specs, pricing tiers, and get a custom quote directly on WhatsApp.</p>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<div class="prod-nav">
+  <div class="pn-tab" data-tab="rn">Round Neck</div>
+  <div class="pn-tab" data-tab="os">Oversized</div>
+  <div class="pn-tab" data-tab="po">Polo</div>
+  <div class="pn-tab" data-tab="hw">Hoodies &amp; Sweatshirts</div>
+</div>
+
+<!-- ════ ROUND NECK ════ -->
+<div class="pd" id="tab-rn">
+  <div class="pd-img r">
+    <div class="pd-badge">220 GSM · Single Jersey</div>
+    👕
+    <div class="pd-tag">Most Popular</div>
+  </div>
+  <div class="pd-info r d1">
+    <p class="p-ey">Essential Tees</p>
+    <h2 class="p-n">Classic<br>Roundneck</h2>
+    <p class="p-d">Our flagship roundneck t-shirt, engineered for perfect everyday wear. Clean silhouette with ribbed crew neck, double-stitched hems, and smooth surface ideal for all printing techniques.</p>
+    <p class="lbl">Quality Specs</p>
+    <div class="specs">
+      <div class="sp"><div class="ck"><svg><use href="#ck"/></svg></div>180 &amp; 220 GSM Options</div>
+      <div class="sp"><div class="ck"><svg><use href="#ck"/></svg></div>Bio-Washed &amp; Pre-Shrunk</div>
+      <div class="sp"><div class="ck"><svg><use href="#ck"/></svg></div>100% Super Combed Cotton</div>
+      <div class="sp"><div class="ck"><svg><use href="#ck"/></svg></div>Lycra Ribbed Neck</div>
+    </div>
+    <p class="lbl">Wholesale Pricing</p>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="pt"><thead><tr><th>Type</th><th class="bv"><div class="bvt">Best Value</div><br>500+ Units</th><th>200 Units</th><th>100 Units</th><th>50+ Units</th></tr></thead>
+    <tbody>
+      <tr><td>Plain</td><td class="bv">₹210</td><td>₹230</td><td>₹250</td><td>₹280</td></tr>
+      <tr><td>Chest Print</td><td class="bv">₹305</td><td>₹315</td><td>₹325</td><td>₹295</td></tr>
+      <tr><td>Front + Back</td><td class="bv">₹305</td><td>₹315</td><td>₹325</td><td>₹355</td></tr>
+    </tbody></table></div>
+    <p class="lbl" style="margin-top:18px;">Available Sizes</p>
+    <div class="szs"><div class="sz">S</div><div class="sz">M</div><div class="sz">L</div><div class="sz">XL</div><div class="sz">XXL</div><div class="sz">XXXL</div></div>
+    <div class="disc"><strong>Note:</strong> Prices vary based on printing size, quantity &amp; fabric. Final quote confirmed after design review. GST extra.</div>
+    <div class="pcta">
+      <a href="https://wa.me/919843048883?text=Hi%20Style%20Loop!%20I'm%20interested%20in%20Classic%20Roundneck%20T-shirts.%20Please%20share%20details." target="_blank" class="bwa"><svg><use href="#wa"/></svg>Get Custom Quote</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════ OVERSIZED ════ -->
+<div class="pd alt-bg" id="tab-os">
+  <div class="pd-img r">
+    <div class="pd-badge">240 GSM · Loo Knit</div>
+    🧥
+    <div class="pd-tag">Streetwear</div>
+  </div>
+  <div class="pd-info r d1">
+    <p class="p-ey">Streetwear</p>
+    <h2 class="p-n">Premium<br>Oversized</h2>
+    <p class="p-d">240 GSM loop knit for the perfect dropped-shoulder silhouette. Heavyweight feel, streetwear-ready, built for bold graphic printing and brand statement pieces.</p>
+    <p class="lbl">Quality Specs</p>
+    <div class="specs">
+      <div class="sp"><div class="ck"><svg><use href="#ck"/></svg></div>240 GSM Loop Knit</div>
+      <div class="sp"><div class="ck"><svg><use href="#ck"/></svg></div>Dropped Shoulder Cut</div>
+      <div class="sp"><div class="ck"><svg><use href="#ck"/></svg></div>Bio-Washed Finish</div>
+      <div class="sp"><div class="ck"><svg><use href="#ck"/></svg></div>Bold Print Ready</div>
+    </div>
+    <p class="lbl">Wholesale Pricing</p>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="pt"><thead><tr><th>Type</th><th class="bv"><div class="bvt">Best Value</div><br>500+ Units</th><th>200 Units</th><th>100 Units</th><th>50+ Units</th></tr></thead>
+    <tbody>
+      <tr><td>Plain</td><td class="bv">₹280</td><td>₹300</td><td>₹320</td><td>₹350</td></tr>
+      <tr><td>Chest Print</td><td class="bv">₹375</td><td>₹385</td><td>₹395</td><td>₹365</td></tr>
+      <tr><td>Front + Back</td><td class="bv">₹375</td><td>₹385</td><td>₹395</td><td>₹425</td></tr>
+    </tbody></table></div>
+    <p class="lbl" style="margin-top:18px;">Available Sizes</p>
+    <div class="szs"><div class="sz">S</div><div class="sz">M</div><div class="sz">L</div><div class="sz">XL</div><div class="sz">XXL</div><div class="sz">XXXL</div></div>
+    <div class="disc"><strong>Note:</strong> Prices vary based on printing size, quantity &amp; fabric. Final quote confirmed after design review. GST extra.</div>
+    <div class="pcta">
+      <a href="https://wa.me/919843048883?text=Hi%20Style%20Loop!%20I'm%20interested%20in%20Premium%20Oversized%20T-shirts.%20Please%20share%20details." target="_blank" class="bwa"><svg><use href="#wa"/></svg>Get Custom Quote</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════ POLO ════ -->
+<div class="pd" id="tab-po">
+  <div class="pd-img r">
+    <div class="pd-badge">200–220 GSM</div>
+    🎽
+    <div class="pd-tag">Corporate</div>
+  </div>
+  <div class="pd-info r d1">
+    <p class="p-ey">Corporate</p>
+    <h2 class="p-n">Executive<br>Polo</h2>
+    <p class="p-d">Engineered for the corporate floor. Available in Cotton Airtex (220 GSM) and Mars (200 GSM) — both with structured collar, perfect for chest embroidery and logo placement.</p>
+    <p class="lbl">Quality Specs</p>
+    <div class="specs">
+      <div class="sp"><div class="ck"><svg><use href="#ck"/></svg></div>220 GSM Cotton Airtex</div>
+      <div class="sp"><div class="ck"><svg><use href="#ck"/></svg></div>200 GSM Mars Option</div>
+      <div class="sp"><div class="ck"><svg><use href="#ck"/></svg></div>Structured Collar</div>
+      <div class="sp"><div class="ck"><svg><use href="#ck"/></svg></div>Embroidery Ready</div>
+    </div>
+    <p class="lbl">Wholesale Pricing</p>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="pt"><thead><tr><th>Type</th><th class="bv"><div class="bvt">Best Value</div><br>500+ Units</th><th>200 Units</th><th>100 Units</th><th>50+ Units</th></tr></thead>
+    <tbody>
+      <tr><td>Plain (Airtex)</td><td class="bv">₹250</td><td>₹270</td><td>₹290</td><td>₹320</td></tr>
+      <tr><td>Plain (Mars)</td><td class="bv">₹160</td><td>₹180</td><td>₹200</td><td>₹230</td></tr>
+      <tr><td>Chest Print (Airtex)</td><td class="bv">₹345</td><td>₹355</td><td>₹365</td><td>₹335</td></tr>
+      <tr><td>Chest Print (Mars)</td><td class="bv">₹255</td><td>₹265</td><td>₹275</td><td>₹245</td></tr>
+    </tbody></table></div>
+    <p class="lbl" style="margin-top:18px;">Available Sizes</p>
+    <div class="szs"><div class="sz">S</div><div class="sz">M</div><div class="sz">L</div><div class="sz">XL</div><div class="sz">XXL</div><div class="sz">XXXL</div></div>
+    <div class="disc"><strong>Note:</strong> Prices vary based on printing size, quantity &amp; fabric. Final quote confirmed after design review. GST extra.</div>
+    <div class="pcta">
+      <a href="https://wa.me/919843048883?text=Hi%20Style%20Loop!%20I'm%20interested%20in%20Executive%20Polo%20T-shirts.%20Please%20share%20details." target="_blank" class="bwa"><svg><use href="#wa"/></svg>Get Custom Quote</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════ HOODIES & SWEATSHIRTS ════ -->
+<div class="pd alt-bg" id="tab-hw">
+  <div class="pd-img r">
+    <div class="pd-badge">300–350 GSM · Loop Knit</div>
+    🧣
+    <div class="pd-tag">Winter Wear</div>
+  </div>
+  <div class="pd-info r d1">
+    <p class="p-ey">Winter Wear</p>
+    <h2 class="p-n">Hoodies &amp;<br>Sweatshirts</h2>
+    <p class="p-d">300–350 GSM Loop Knit construction. Heavyweight, warm, and built to last. Ideal for brand merchandise, college events, and corporate winter gifting programs.</p>
+    <p class="lbl">Quality Specs</p>
+    <div class="specs">
+      <div class="sp"><div class="ck"><svg><use href="#ck"/></svg></div>300–350 GSM Loop Knit</div>
+      <div class="sp"><div class="ck"><svg><use href="#ck"/></svg></div>Fleece Lined Interior</div>
+      <div class="sp"><div class="ck"><svg><use href="#ck"/></svg></div>Kangaroo Pocket</div>
+      <div class="sp"><div class="ck"><svg><use href="#ck"/></svg></div>Zip Options Available</div>
+    </div>
+    <p class="lbl">Wholesale Pricing</p>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="pt"><thead><tr><th>Product</th><th class="bv"><div class="bvt">Best Value</div><br>500+ Units</th><th>200 Units</th><th>100 Units</th><th>50+ Units</th></tr></thead>
+    <tbody>
+      <tr><td>Hoodie — Plain</td><td class="bv">₹480</td><td>₹500</td><td>₹520</td><td>₹550</td></tr>
+      <tr><td>Hoodie — Chest Print</td><td class="bv">₹575</td><td>₹585</td><td>₹595</td><td>₹565</td></tr>
+      <tr><td>Sweatshirt — Plain</td><td class="bv">₹430</td><td>₹450</td><td>₹470</td><td>₹500</td></tr>
+      <tr><td>Sweatshirt — Chest Print</td><td class="bv">₹525</td><td>₹535</td><td>₹545</td><td>₹795</td></tr>
+    </tbody></table></div>
+    <p class="lbl" style="margin-top:18px;">Available Sizes</p>
+    <div class="szs"><div class="sz">S</div><div class="sz">M</div><div class="sz">L</div><div class="sz">XL</div><div class="sz">XXL</div></div>
+    <div class="disc"><strong>Note:</strong> Prices vary based on printing size, quantity &amp; fabric. Final quote confirmed after design review. GST extra.</div>
+    <div class="pcta">
+      <a href="https://wa.me/919843048883?text=Hi%20Style%20Loop!%20I'm%20interested%20in%20Hoodies%20and%20Sweatshirts.%20Please%20share%20details." target="_blank" class="bwa"><svg><use href="#wa"/></svg>Get Custom Quote</a>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM CTA -->
+<section class="bcta">
+  <p class="ey r">Ready to Order?</p>
+  <h2 class="tt r">Let's Build<br><em>Something Great.</em></h2>
+  <p class="sb r">Custom pricing based on quantity, fabric &amp; print type.<br>WhatsApp us — response within 4 hours.</p>
+  <div class="bcta-r r">
+    <a href="https://wa.me/919843048883?text=Hi%20Style%20Loop!%20I%20want%20to%20place%20a%20bulk%20order.%20Please%20share%20catalogue%20and%20pricing." target="_blank" class="blm"><svg><use href="#wa"/></svg>WhatsApp +91 98430 48883</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fl">STYLE <em>LOOP</em></div>
+  <p>Premium Bulk Apparel · Coimbatore</p>
+  <p>+91 98430 48883</p>
+</footer>
+
+<!-- FIXED WA -->
+<a href="https://wa.me/919843048883?text=Hi%20Style%20Loop!%20I%20want%20to%20enquire%20about%20bulk%20orders." target="_blank" class="fwa" aria-label="WhatsApp"><svg><use href="#wa"/></svg></a>
+
+<script>
+/* ── TAB SWITCHING WITH HASH SUPPORT ── */
+const TABS = ['rn','os','po','hw'];
+
+function showTab(id) {
+  /* hide all panels */
+  TABS.forEach(t => {
+    const panel = document.getElementById('tab-'+t);
+    if(panel) panel.classList.remove('active');
+  });
+  /* deactivate all tab buttons */
+  document.querySelectorAll('.pn-tab').forEach(t => t.classList.remove('active'));
+
+  /* show target panel */
+  const target = document.getElementById('tab-'+id);
+  if(target) {
+    target.classList.add('active');
+    /* trigger scroll animations */
+    target.querySelectorAll('.r').forEach(el => {
+      el.classList.remove('in');
+      requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('in')));
+    });
+  }
+  /* activate tab button */
+  const btn = document.querySelector('.pn-tab[data-tab="'+id+'"]');
+  if(btn) btn.classList.add('active');
+
+  /* update URL hash without scrolling */
+  history.replaceState(null, '', '#'+id);
+}
+
+/* ── TAB CLICK HANDLERS ── */
+document.querySelectorAll('.pn-tab').forEach(tab => {
+  tab.addEventListener('click', () => showTab(tab.dataset.tab));
+});
+
+/* ── ON LOAD: read hash from URL ── */
+const hash = window.location.hash.replace('#','');
+const initTab = TABS.includes(hash) ? hash : 'rn';
+showTab(initTab);
+
+/* ── SCROLL ANIMATIONS — identical to index.html ── */
+const obs = new IntersectionObserver(e => {
+  e.forEach(x => { if(x.isIntersecting){ x.target.classList.add('in'); obs.unobserve(x.target); }});
+}, {threshold:.08});
+document.querySelectorAll('.r').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
